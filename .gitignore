@@ -1,0 +1,8 @@
+# Resultados: llevan cifras personales y nombres de repos. Nunca al repositorio.
+builder-recap-*.html
+data.js
+*.png
+!docs/og.png
+*.mp4
+*.webm
+node_modules/

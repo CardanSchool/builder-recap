@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i="<!--TKEY-->"><!--TITLE--></title>
+<!--META-->
+<style>
+/*FONTS*/
+</style>
+<style>
+  :root { --ink:#1A1714; --cream:#F2EDE6; --orange:#E8824D; --mute:#A3988F; --line:#38322E; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { background: #0f0d0c; color: var(--cream); font: 14px/1.4 Inter, system-ui, sans-serif; display: grid; grid-template-rows: auto 1fr auto auto; justify-items: center; gap: 10px; padding: 12px 16px; }
+  .bar { display: flex; gap: 6px; width: min(100%, calc((100vh - 120px) * 0.8)); }
+  .bar[hidden] { display: block; height: 0; overflow: hidden; visibility: hidden; } /* conserva su fila de la rejilla */
+  .bar i { flex: 1; height: 3px; background: #38322E; position: relative; overflow: hidden; }
+  .bar i b { position: absolute; inset: 0; background: var(--cream); transform-origin: left; transform: scaleX(0); }
+  .stage { min-height: 0; display: grid; place-items: center; width: 100%; }
+  canvas { height: 100%; max-height: calc(100vh - 176px); max-width: 100%; aspect-ratio: 1080 / 1350; display: block; cursor: pointer; }
+  .ctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; font-family: "Space Mono", monospace; font-size: 12px; }
+  button, select, input { font: inherit; color: var(--cream); background: #272320; border: 1px solid var(--line); padding: 7px 12px; border-radius: 2px; cursor: pointer; }
+  button:hover { border-color: var(--mute); }
+  button.on { background: var(--cream); color: var(--ink); }
+  .hint { color: var(--mute); }
+  #panel { position: fixed; right: 14px; bottom: 14px; width: 270px; background: #1A1714; border: 1px solid var(--line); padding: 12px; font-family: "Space Mono", monospace; font-size: 12px; display: none; }
+  #panel.open { display: block; }
+  #panel label { display: block; color: var(--mute); margin: 10px 0 4px; text-transform: uppercase; letter-spacing: .1em; font-size: 10px; }
+  #panel select, #panel input { width: 100%; }
+  #msg { color: var(--orange); }
+  .sharebar { display: flex; justify-content: center; font-family: "Space Mono", monospace; font-size: 13px; }
+  .sharebar button { min-height: 44px; padding: 10px 28px; }
+  /* Hoja de compartir (share.js) */
+  #pub { position: fixed; inset: 0; z-index: 4; background: rgba(14,12,11,.74); display: grid; place-items: center; padding: 16px; font: 15px/1.45 Inter, system-ui, sans-serif; color: #1A1714; }
+  #pub[hidden] { display: none; }
+  #pub button, #pub a { color: #1A1714; font-family: Inter, system-ui, sans-serif; }
+  #pub .box { width: min(100%, 960px); max-height: calc(100vh - 32px); overflow: auto; background: #fff; border-radius: 18px; display: grid; grid-template-columns: 1fr; box-shadow: 0 30px 90px rgba(0,0,0,.5); }
+  #pub .side { background: #1A1714; padding: 22px; display: grid; place-items: center; align-content: center; gap: 10px; }
+  #pub .side img { max-width: 100%; max-height: 62vh; border-radius: 8px; box-shadow: 0 16px 40px rgba(0,0,0,.5); display: block; }
+  #pub .side .size { font: 11px "Space Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: #A3988F; text-align: center; }
+  #pub .main { padding: 24px; position: relative; min-width: 0; }
+  #pub h2 { font: 700 24px/1.2 "Source Serif 4", Georgia, serif; margin: 0 0 4px; padding-right: 40px; }
+  #pub .sub { color: #6B6560; margin: 0 0 16px; }
+  #pub .x { position: absolute; top: 14px; right: 14px; border: 0; background: #F2EDE6; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; line-height: 1; padding: 0; cursor: pointer; }
+  #pub .lbl { font: 700 11px "Space Mono", monospace; letter-spacing: .14em; text-transform: uppercase; color: #6B6560; margin: 0 0 8px; }
+  #pub .pick { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; margin-bottom: 14px; scrollbar-width: thin; }
+  #pub .pick button { flex: none; width: 58px; padding: 0; border: 2px solid transparent; border-radius: 8px; background: none; cursor: pointer; text-align: center; font-size: 10px; color: #6B6560; }
+  #pub .pick button img { width: 100%; display: block; border-radius: 5px; }
+  #pub .pick button[aria-pressed="true"] { border-color: #E8824D; }
+  #pub .pick button span { display: block; padding: 3px 0 1px; }
+  #pub .styles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+  #pub .styles button { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 7px 2px; border: 1.5px solid #E2DBD1; border-radius: 10px; background: #fff; font-size: 12px; line-height: 1.2; cursor: pointer; }
+  #pub .styles button[aria-pressed="true"] { border-color: #1A1714; box-shadow: inset 0 0 0 1px #1A1714; }
+  #pub .sw { position: relative; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #D5CCC0; }
+  #pub .sw i { position: absolute; right: -2px; bottom: -2px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; }
+  #pub .nets { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  #pub .li, #pub .ig { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; border: 0; border-radius: 10px; color: #fff !important; font-weight: 600; font-size: 16px; cursor: pointer; width: 100%; }
+  #pub .li { background: #0A66C2; } #pub .li:hover { background: #004182; } #pub .li:disabled { opacity: .7; cursor: progress; }
+  #pub .ig { background: linear-gradient(45deg, #F58529, #DD2A7B 55%, #8134AF); }
+  #pub .li b, #pub .ig b { background: #fff; border-radius: 5px; padding: 0 5px; font: 700 14px Arial, sans-serif; }
+  #pub .li b { color: #0A66C2; } #pub .ig b { color: #DD2A7B; }
+  #pub .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  #pub .ghost { min-height: 46px; border: 1.5px solid #1A1714; border-radius: 10px; background: #fff; font-weight: 600; font-size: 15px; cursor: pointer; display: grid; place-items: center; text-align: center; text-decoration: none; padding: 0 10px; }
+  #pub .msg { color: #9D502F; min-height: 1.4em; margin: 12px 0 0; font-size: 14px; }
+  #pub .hint { color: #6B6560; font-size: 13px; margin: 6px 0 0; }
+  #pub .lnk { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
+  #pub .steps { margin: 14px 0; padding-left: 22px; } #pub .steps li { margin: 6px 0; }
+  #pub .steps.big { font-size: 16px; } #pub .steps.big li { margin: 10px 0; }
+  #pub textarea { width: 100%; min-height: 220px; border: 1.5px solid #E2DBD1; border-radius: 10px; padding: 12px; margin: 0 0 12px; font: 14px/1.5 Inter, system-ui, sans-serif; color: #1A1714; background: #fff; resize: vertical; cursor: text; }
+  #pub .done { text-align: center; padding: 18px 0; }
+  #pub .tick { width: 56px; height: 56px; border-radius: 50%; background: #E8824D; display: inline-grid; place-items: center; font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+  #pub img.wide { display: block; width: 100%; border-radius: 8px; border: 1px solid #E2DBD1; margin: 4px 0 2px; }
+  #pub :focus-visible { outline: 2px solid #9D502F; outline-offset: 2px; }
+  @media (min-width: 760px) { #pub .box { grid-template-columns: 340px 1fr; } #pub .side { border-radius: 18px 0 0 18px; } }
+  @media (max-width: 759px) { #pub { padding: 0; align-items: end; } #pub .box { border-radius: 18px 18px 0 0; max-height: 100vh; } #pub .side { padding: 12px; } #pub .side img { max-height: 30vh; } #pub .styles { grid-template-columns: repeat(2, 1fr); } }
+/*EXTRA-CSS*/
+</style>
+</head>
+<body>
+<!--INTRO-->
+<div class="bar" id="bar"></div>
+<div class="stage"><canvas id="c" width="1080" height="1350" aria-label="Tarjetas del resumen del año" data-ia="ui.canvas"></canvas></div>
+<div class="sharebar" id="sharebar"><button id="sb-open" class="on" data-i="ui.share">Compartir</button></div>
+<div class="ctl">
+  <button id="prev" aria-label="Anterior" data-ia="ui.prev">←</button>
+  <button id="play" data-i="ui.pause">Pausa</button>
+  <button id="next" aria-label="Siguiente" data-ia="ui.next">→</button>
+  <button id="snd" data-i="ui.soundOn" aria-pressed="true">Sonido: sí</button>
+  <button id="rec" data-i="ui.video">Descargar vídeo</button>
+  <!--AGAIN-->
+  <span class="hint" data-i="ui.hint">P = panel · ← → = tarjetas · espacio = pausa</span>
+  <span id="msg"></span>
+</div>
+<div id="panel">
+  <strong data-i="ui.settings">Ajustes</strong>
+  <label for="vLang" data-i="ui.lang">Idioma</label>
+  <select id="vLang" data-lang><option value="es">Español</option><option value="en">English</option></select>
+  <label for="vGimbal" data-i="ui.gimbal">Gimbal de fondo</label>
+  <select id="vGimbal"><option value="settle" data-i="ui.gimbal.settle">Llega girando y se estabiliza (marca)</option><option value="drift" data-i="ui.gimbal.drift">Gira siempre, despacio</option></select>
+  <label for="vNames" data-i="ui.names">Nombres de proyectos</label>
+  <select id="vNames"><option value="hide" data-i="ui.names.hide">Ocultos (por defecto)</option><option value="show" data-i="ui.names.show">Visibles</option></select>
+  <label for="vArch" data-i="ui.arch">Arquetipo</label>
+  <select id="vArch"><option value="auto" data-i="ui.arch.auto">El que sale de los datos</option></select>
+  <label for="vCost" data-i="ui.cost">Cifra en dólares del consumo</label>
+  <select id="vCost"><option value="show" data-i="ui.cost.show">Visible</option><option value="hide" data-i="ui.cost.hide">Oculta (solo la posición)</option></select>
+  <label for="vFormat" data-i="ui.format">Formato</label>
+  <select id="vFormat"><option value="9x16" data-i="ui.format.916">Vertical 9:16 (reels, stories)</option><option value="4x5" data-i="ui.format.45">4:5 (publicación de LinkedIn)</option></select>
+  <label for="vUser" data-i="ui.user">Nombre</label>
+  <input id="vUser" type="text" maxlength="24" autocomplete="off">
+</div>
+<div id="pub" hidden role="dialog" aria-modal="true" aria-labelledby="pub-title"></div>
+<!--SCRIPTS-->
+</body>
+</html>

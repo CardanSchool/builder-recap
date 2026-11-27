@@ -1,0 +1,42 @@
+I want to make my "Builder Recap": a summary of my year building things with AI.
+
+Use what you know about me: your memory and our conversations this year. Do not ask me questions. Do not make anything up: whatever you do not know is "dk".
+
+If you cannot name at least one specific project of mine from this year, stop: tell me in one line that without history you cannot do it well and that I should do it with Claude Code on my computer, pasting "Make my Builder Recap following github.com/CardanSchool/builder-recap".
+
+If you can, fill in this JSON (keep the keys exactly as they are, and write the values in English):
+
+{
+  "v": 1,
+  "idioma": "en",
+  "nombre": "my first name, or empty if you do not know it",
+  "asistente": "your name: ChatGPT, Claude…",
+  "frase": "my year of building in one line, with some spark, 80 characters max",
+  "proyectos": [ { "nombre": "28 characters max", "que": "what it is, 50 characters max", "peso": 3 } ],
+  "temas": [ { "tema": "24 characters max", "peso": 3 } ],
+  "herramientas": [ "18 characters max each" ],
+  "respuestas": { "d1": "yes", "d2": "no", "d3": "dk", "d4": "dk", "t1": "dk", "t2": "dk", "t3": "dk", "t4": "dk", "p1": "dk", "p2": "dk", "p3": "dk", "p4": "dk" }
+}
+
+Rules:
+- "proyectos" (projects): between 1 and 5, the ones we worked on most this year. "peso" (weight) goes from 1 to 5 depending on how much we worked on each. No client or company names: describe them ("an online shop", not the brand).
+- "temas" (topics): between 3 and 6, what we talked about most. "peso" from 1 to 5.
+- "herramientas" (tools): up to 8, the ones I really use (languages, software, AI services).
+- "respuestas" (answers): answer each question about me with "yes", "no" or "dk" (you do not know). Do not assume: if there is no trace of it in what you know about me, it is "dk".
+  d1: Do I use agents that do things for me (code, browse, automate), not just chat?
+  d2: Do I hand over whole tasks and review the result, instead of going step by step?
+  d3: Do I work with several agents or several conversations at once towards the same goal?
+  d4: Have I automated something that repeats (a workflow, a script, my own assistant)?
+  t1: Do I give written, reusable context (instructions, project documents, templates)?
+  t2: Do I use version control (git) or something equivalent so I do not lose work?
+  t3: Do I connect AI to my tools or my data (connectors, APIs, files)?
+  t4: Do I check what the AI does before accepting it (tests, review, real data)?
+  p1: Have I finished and put at least one project into use this year?
+  p2: Does anyone besides me use it (clients, colleagues, users)?
+  p3: Have I worked on this consistently, most weeks?
+  p4: Have I run more than one project at the same time?
+
+Do not show me the JSON: it is only for building the link. The address is https://cardanschool.github.io/builder-recap/#d= followed by the JSON on a single line, encoded in base64url (UTF-8, no "=" at the end). If you can run code, encode it with code; if you cannot do it reliably, URL-encode it instead (like encodeURIComponent).
+
+Reply with only this line, nothing before or after it, with the link in Markdown so the text shows and not the address:
+Your Builder Recap is ready: [See my cards](the address)

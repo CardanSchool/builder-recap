@@ -1,0 +1,33 @@
+# Todos los commits del repo público los firma la misma cuenta: la del primer commit (Cardan School).
+# Falla si llega uno con otro autor, por ejemplo un merge hecho desde la web de GitHub (lo firma quien esté conectado).
+name: Autoría
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  autoria:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Los commits nuevos son de la cuenta del primer commit
+        env:
+          BEFORE: ${{ github.event.before }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          root=$(git rev-list --max-parents=0 "$HEAD_SHA" | tail -1)
+          want=$(git log -1 --format='%an <%ae>' "$root")
+          if [ -n "$BASE" ]; then range="$BASE..$HEAD_SHA"
+          elif [ -n "$BEFORE" ] && ! echo "$BEFORE" | grep -q '^0*$' && git cat-file -e "$BEFORE" 2>/dev/null; then range="$BEFORE..$HEAD_SHA"
+          else range="$HEAD_SHA"; fi
+          bad=$(git log --format='%h %an <%ae>' "$range" | grep -vF " $want" || true)
+          if [ -n "$bad" ]; then
+            echo "Estos commits no son de $want:"; echo "$bad"
+            echo "Configura la identidad del repo (git config user.name / user.email) y rehazlos. Los merges, en local."
+            exit 1
+          fi
+          echo "Todos los commits son de $want."

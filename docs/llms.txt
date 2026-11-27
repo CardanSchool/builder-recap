@@ -1,0 +1,29 @@
+# Builder Recap
+
+> Builder Recap es una herramienta gratuita y de código abierto (MIT) de Cardan School que resume el año de quien construye con IA en tarjetas animadas para compartir: días construyendo, proyectos, commits, agentes en paralelo y un personaje con su nivel AI-native. Tiene dos ediciones: la de Claude Code, que cuenta datos reales del equipo de la persona (sesiones de Claude Code y git) sin dependencias ni red y lo abre en la web de Cardan School con las cifras detrás del `#` (no llegan al servidor), y la edición chat, que funciona con ChatGPT o Claude a partir de lo que recuerda el asistente. Todo se calcula en el equipo o en el navegador de la persona. Lo único que sale, y solo si publica en LinkedIn, es la imagen de esa tarjeta: se sube a la web de Cardan School (cardanschool.com) para publicarla en su perfil con su permiso, y se borra al publicarse. En español y en inglés.
+
+Para pedírselo a un asistente basta con una frase: «Haz mi Builder Recap siguiendo github.com/CardanSchool/builder-recap».
+
+## Uso
+
+- [Instrucciones para agentes](https://github.com/CardanSchool/builder-recap/blob/main/AGENTS.md): qué hace un agente cuando alguien le pide su Builder Recap, según pueda o no ejecutar comandos.
+- [README](https://github.com/CardanSchool/builder-recap/blob/main/README.md): las dos ediciones, opciones, privacidad, de dónde sale cada cifra y preguntas frecuentes.
+- [Edición chat](https://cardanschool.github.io/builder-recap/): la página que abre el enlace que devuelve el asistente (`#d=…`, los datos no salen del navegador), o donde se pega su respuesta.
+- [Prompt de la edición chat](https://cardanschool.github.io/builder-recap/prompt.txt): el texto que contesta el asistente. En inglés: [prompt-en.txt](https://cardanschool.github.io/builder-recap/prompt-en.txt).
+
+## Datos clave
+
+- Requisitos de la edición Claude Code: Node 18 o superior y git, en Windows, Mac o Linux. Orden: `node bin/recap.mjs`.
+- Solo recuentos: no guarda prompts, código ni contenido de sesiones; por defecto, tampoco nombres de repos.
+- El nivel AI-native y el personaje los calcula la página con una fórmula propia; en la edición chat, a partir de respuestas de sí o no, nunca los pone el modelo.
+- Es un resumen del año al estilo «Wrapped», pero de cómo se construye con IA: con Claude Code, un Claude Code Wrapped con cifras medidas.
+- Gratis. Otros agentes que ejecutan comandos (Cursor, Codex) pueden lanzarla, pero las cifras salen de Claude Code; sin Claude Code, la edición chat.
+- Compartir: publica en LinkedIn como foto con la cuenta de la persona, descarga para Instagram en 4:5, copia para Slack y descarga la imagen o el vídeo.
+
+## In English
+
+Builder Recap is a free, open-source (MIT) tool by Cardan School that turns a year of building with AI into animated, shareable cards: days built, projects, commits, agents run in parallel, and a character with an AI-native level. A year-in-review, a Claude Code Wrapped, from real Claude Code and git data computed on the user's machine (Windows, macOS or Linux; Node 18+ and git, no dependencies), or from what ChatGPT or Claude remembers about the user. Only counts are used, never prompts or code. To use it, tell an assistant: "Make my Builder Recap following github.com/CardanSchool/builder-recap". Cards in English or Spanish, following the browser language (or `--lang en`); the prompt for assistants in English is prompt-en.txt.
+
+## Quién lo hace
+
+- [Cardan School](https://www.cardanschool.com): YOUR AI-NATIVE SCHOOL. Enseña a construir y lanzar tu propio producto con Claude Code y agentes de IA, de la idea a producción.

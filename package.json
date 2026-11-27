@@ -1,0 +1,43 @@
+{
+  "name": "builder-recap",
+  "version": "0.1.0",
+  "description": "Tu año construyendo con IA, en tarjetas para compartir. Con tus datos reales de Claude Code y git, o con lo que recuerda tu asistente. Todo se calcula en tu equipo.",
+  "keywords": [
+    "claude-code",
+    "ai-agents",
+    "year-in-review",
+    "wrapped",
+    "claude-code-wrapped",
+    "recap",
+    "developer-stats",
+    "git",
+    "chatgpt",
+    "claude",
+    "cardan-school"
+  ],
+  "homepage": "https://cardanschool.github.io/builder-recap/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CardanSchool/builder-recap.git"
+  },
+  "bugs": "https://github.com/CardanSchool/builder-recap/issues",
+  "author": "Cardan School (https://www.cardanschool.com)",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "builder-recap": "bin/recap.mjs"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node bin/recap.mjs",
+    "build": "node src/build.mjs",
+    "test": "node --test"
+  }
+}

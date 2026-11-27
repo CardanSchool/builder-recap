@@ -1,0 +1,39 @@
+<div id="intro" hidden>
+  <div class="in">
+    <p class="eyebrow"><a href="https://www.cardanschool.com">Cardan School</a> · Builder Recap · <button type="button" class="lang" id="lang-other" data-setlang="other" data-i="i.otherLang">English</button></p>
+    <h1 data-ih="i.h1">Tu año construyendo con IA. <em>En un enlace.</em></h1>
+    <p class="lead" data-i="i.lead">Si trabajas con ChatGPT o con Claude, ya sabe en qué has andado este año. Pásale esto y te devuelve un enlace con tus tarjetas y tu carta del año.</p>
+
+    <ol class="steps">
+      <li><span class="n">1</span><div><span data-ih="i.s1"><b>Copia esto.</b></span>
+        <div class="row"><button id="copy" class="main" data-i="i.copy">Copiar para mi asistente</button><span id="copied" role="status" aria-live="polite"></span></div></div></li>
+      <li><span class="n">2</span><div data-ih="i.s2"><b>Pégalo en ChatGPT o en Claude</b>, en una conversación nueva. Sale mejor con la memoria o el historial activados.</div></li>
+      <li><span class="n">3</span><div data-ih="i.s3"><b>Pulsa «Ver mis tarjetas»</b> en su respuesta. Salen aquí mismo, listas para publicar.</div></li>
+    </ol>
+
+    <details class="see">
+      <summary data-i="i.see">Ver lo que vas a pegar</summary>
+      <p class="note" data-i="i.seeNote">Instrucciones para el asistente: contesta con lo que sabe de ti, sin hacerte preguntas, y te devuelve una sola línea con el enlace a tus tarjetas.</p>
+      <textarea id="prompt" readonly rows="12" aria-label="Prompt para tu asistente" data-ia="i.promptAria"><!--PROMPT--></textarea>
+    </details>
+
+    <section class="cc">
+      <p class="step" data-i="i.cc">¿Usas Claude Code?</p>
+      <p data-i="i.ccText">Salen tus cifras reales: días, commits, agentes en paralelo y tokens. Pégale esta frase:</p>
+      <div class="row"><code id="cc-line" data-i="i.ccLine">Haz mi Builder Recap siguiendo __REPO__</code><button id="copy-cc" data-i="i.ccCopy">Copiar</button></div>
+    </section>
+
+    <details class="alt" id="alt">
+      <summary data-i="i.alt">¿El enlace no abre? Pégalo aquí</summary>
+      <label for="answer" data-i="i.altLabel">En tu asistente, haz clic derecho en «Ver mis tarjetas», elige «Copiar dirección del enlace» y pégala aquí.</label>
+      <textarea id="answer" rows="4" placeholder="El enlace de «Ver mis tarjetas»" data-ip="i.altPh" spellcheck="false"></textarea>
+      <p id="err" role="alert"></p>
+      <div class="row"><button id="go" class="main" data-i="i.go">Ver mis tarjetas</button></div>
+    </details>
+
+    <div class="row"><button id="demo" data-i="i.demo">Ver un ejemplo</button></div>
+
+    <p class="note" data-i="i.privacy">Lo que va en el enlace se queda en tu navegador: esta página no lo envía a ningún sitio. No son cifras medidas, es lo que tu asistente recuerda de ti.</p>
+    <p class="note" data-ih="i.about">Builder Recap es de <a href="https://www.cardanschool.com">Cardan School</a>, la escuela donde se aprende a construir producto con Claude Code y agentes. ¿Quieres saber por dónde seguir? El <a href="https://cardanschool.com/radar">Radar</a> te lo dice en 60 segundos.</p>
+  </div>
+</div>

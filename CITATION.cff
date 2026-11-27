@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Si usas o citas Builder Recap, cítalo así."
+type: software
+title: "Builder Recap"
+abstract: >-
+  Herramienta gratuita y de código abierto de Cardan School que resume el año de quien construye con IA en tarjetas
+  animadas para compartir, con datos reales de Claude Code y git o con lo que recuerda su asistente (ChatGPT o Claude).
+  Todo se calcula en el equipo de la persona y solo usa recuentos.
+authors:
+  - name: "Cardan School"
+    website: "https://www.cardanschool.com"
+repository-code: "https://github.com/CardanSchool/builder-recap"
+url: "https://cardanschool.github.io/builder-recap/"
+license: MIT
+version: 0.1.0
+date-released: 2026-11-27
+keywords:
+  - claude-code
+  - ai-agents
+  - year-in-review
+  - wrapped
+  - developer-stats

@@ -1,0 +1,42 @@
+Quiero hacer mi «Builder Recap»: un resumen de mi año construyendo cosas con IA.
+
+Usa lo que sabes de mí: tu memoria y nuestras conversaciones de este año. No me hagas preguntas. No inventes nada: lo que no sepas es "ns".
+
+Si no puedes nombrar al menos un proyecto concreto mío de este año, no sigas: dime en una línea que sin historial no puedes hacerlo bien y que lo haga con Claude Code en su ordenador, pegándole «Haz mi Builder Recap siguiendo github.com/CardanSchool/builder-recap».
+
+Si puedes, rellena este JSON:
+
+{
+  "v": 1,
+  "idioma": "es",
+  "nombre": "mi nombre de pila, o vacío si no lo sabes",
+  "asistente": "tu nombre: ChatGPT, Claude…",
+  "frase": "mi año construyendo en una frase, con algo de chispa, máximo 80 caracteres",
+  "proyectos": [ { "nombre": "máximo 28 caracteres", "que": "qué es, máximo 50 caracteres", "peso": 3 } ],
+  "temas": [ { "tema": "máximo 24 caracteres", "peso": 3 } ],
+  "herramientas": [ "máximo 18 caracteres cada una" ],
+  "respuestas": { "d1": "si", "d2": "no", "d3": "ns", "d4": "ns", "t1": "ns", "t2": "ns", "t3": "ns", "t4": "ns", "p1": "ns", "p2": "ns", "p3": "ns", "p4": "ns" }
+}
+
+Reglas:
+- "proyectos": entre 1 y 5, los que más hemos trabajado este año. "peso" va de 1 a 5 según cuánto hemos trabajado en cada uno. Sin nombres de clientes ni de empresas: descríbelos («una tienda online», no la marca).
+- "temas": entre 3 y 6, de qué hemos hablado más. "peso" de 1 a 5.
+- "herramientas": hasta 8, las que uso de verdad (lenguajes, programas, servicios de IA).
+- "respuestas": contesta cada pregunta sobre mí con "si", "no" o "ns" (no lo sabes). No supongas: si no hay rastro en lo que sabes de mí, es "ns".
+  d1: ¿Uso agentes que hacen cosas por mí (programar, navegar, automatizar) y no solo chat?
+  d2: ¿Encargo tareas enteras y reviso el resultado, en vez de ir paso a paso?
+  d3: ¿Trabajo con varios agentes o varias conversaciones a la vez para un mismo objetivo?
+  d4: ¿He automatizado algo que se repite (un flujo, un script, un asistente propio)?
+  t1: ¿Doy contexto por escrito y reutilizable (instrucciones, documentos del proyecto, plantillas)?
+  t2: ¿Uso control de versiones (git) o algo equivalente para no perder el trabajo?
+  t3: ¿Conecto la IA con mis herramientas o mis datos (conectores, API, archivos)?
+  t4: ¿Compruebo lo que hace la IA antes de darlo por bueno (pruebas, revisión, datos reales)?
+  p1: ¿He terminado y puesto en uso al menos un proyecto este año?
+  p2: ¿Lo usa alguien más que yo (clientes, compañeros, usuarios)?
+  p3: ¿He trabajado en esto de forma constante, la mayoría de las semanas?
+  p4: ¿He llevado más de un proyecto a la vez?
+
+El JSON no me lo enseñes: es solo para construir el enlace. La dirección es https://cardanschool.github.io/builder-recap/#d= seguida del JSON en una sola línea, codificado en base64url (UTF-8, sin «=» al final). Si puedes ejecutar código, codifícalo con código; si no puedes hacerlo con seguridad, codifícalo para URL (como encodeURIComponent).
+
+Contéstame solo con esta línea, sin nada antes ni después, y con el enlace en formato Markdown para que se vea el texto y no la dirección:
+Tu Builder Recap está listo: [Ver mis tarjetas](la dirección)
